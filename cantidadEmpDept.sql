@@ -5,7 +5,7 @@ set serveroutput on;
 
 /*Cursor para mostrar cantidad de empleados en cada departamento de la empresa*/
 declare
- cursor candep is select dname,count(empno) as Cantidad from emp e join dept d on e.deptno=d.deptno
+ cursor candep is select initcap(dname) "Nombre",count(empno) as Cantidad from emp e join dept d on e.deptno=d.deptno
  group by dname;
  v_nombre varchar2(30);
  v_cantidad number;
@@ -13,6 +13,7 @@ declare
 begin
  open candep;
  fetch candep into v_nombre,v_cantidad;
+ dbms_output.put_line('CANTIDAD DE EMPLEADOS POR DEPARTAMENTO EN LA EMPRESA');
  while candep%found 
  loop
  exit when candep%notfound;
@@ -26,7 +27,7 @@ end;
 /*Procedimiento con cursor para mostrar cantidad de empleados en cada departamento de la empresa*/
 create or replace procedure deptCant
 is 
- cursor candep is select dname,count(empno) as Cantidad from emp e join dept d on e.deptno=d.deptno
+ cursor candep is select initcap(dname) "Nombre",count(empno) as Cantidad from emp e join dept d on e.deptno=d.deptno
  group by dname;
  v_nombre varchar2(30);
  v_cantidad number;
@@ -34,6 +35,7 @@ is
 begin
 open candep;
  fetch candep into v_nombre,v_cantidad;
+ dbms_output.put_line('Cantidad de empleados por departamento');
  while candep%found 
  loop
  exit when candep%notfound;
