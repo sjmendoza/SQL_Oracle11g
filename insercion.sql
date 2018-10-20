@@ -12,13 +12,16 @@ begin
  dbms_output.put_line('Se insertaron los siguientes datos:');
  dbms_output.put_line('Codigo:'||copiadep.deptno);
  dbms_output.put_line('Depto: '||copiadep.dname);
- dbms_output.put_line('Ubicación: '||copiadep.loc);
+ dbms_output.put_line('UbicaciÃ³n: '||copiadep.loc);
  exception
  when Dup_Val_ON_INDEX 
  then
  dbms_output.put_line('Datos duplicados, no se procesaran');
 end;
 
+/*Estos datos sirven de prueba para el procedimiento almacenado
+Si intenta correr por segunda vez cualquiera de los 2
+lanzara mensaje de duplicado de datos*/
 set serveroutput on;
 
 execute insercion(60,'TI','El Salvador');
