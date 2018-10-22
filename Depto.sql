@@ -1,3 +1,5 @@
+/*Correr procedimiento, con esquema SCOTT */
+/*Busca segun el codigo de depto, el nombre y ubicacion de dicho departamento*/
 create or replace procedure Depto(cod dept.deptno%type)
 is
  r dept%rowtype;
