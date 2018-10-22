@@ -1,3 +1,7 @@
+/*Correr procedimiento, con esquema SCOTT; el siguiente proceso
+lo que realiza es insertar datos a la tabla dept, si los datos no
+son duplicados; se procesan e insertan, sino muestra mensaje de duplicacion
+de datos*/
 create or replace procedure insercion(cod number,nom varchar2,loc varchar2)
 is
  copiadep dept%rowtype;
