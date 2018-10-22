@@ -19,6 +19,9 @@ begin
  dbms_output.put_line('Datos duplicados, no se procesaran');
 end;
 
+/*Estos datos sirven de prueba para el procedimiento almacenado
+Si intenta correr por segunda vez cualquiera de los 2
+lanzara mensaje de duplicado de datos*/
 set serveroutput on;
 
 execute insercion(60,'TI','El Salvador');

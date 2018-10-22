@@ -17,7 +17,7 @@ begin
  while candep%found 
  loop
  exit when candep%notfound;
- dbms_output.put_line('Departamento '||v_nombre||': '||v_cantidad||' empleados');
+ dbms_output.put_line('Departamento '||v_nombre||':'||v_cantidad||' empleados');
  fetch candep into v_nombre,v_cantidad;
  end loop;
  close candep;
