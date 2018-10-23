@@ -23,7 +23,7 @@ begin
  where anio=p_anio and mes=p_mes;/*Y segun el anio y mes en las que esta siendo procesada y esto lo introduce en la variable contar*/
  if(contar>0)/*Valida si hay o no datos en la planilla segun sentencia anterior*/
   then
-   dbms_output.put_line('La planilla del año '||p_anio||' y mes '||p_mes||' ya fue procesada');
+   dbms_output.put_line('La planilla del aÃ±o '||p_anio||' y mes '||p_mes||' ya fue procesada');
    return;
  end if;
  open c_dept;/*Cursor que contiene los numeros de dept*/
@@ -229,7 +229,7 @@ begin
   exit when consolidado%notfound;
   dbms_output.put_line('-----------------------------------');
   dbms_output.put_line('Departamento:'||registro.dname);
-  dbms_output.put_line('Nº:'||registro.deptno);
+  dbms_output.put_line('NÂº:'||registro.deptno);
   dbms_output.put_line('Cantidad de empleados:'||registro.cantidad);
   dbms_output.put_line('Salario total:$'||registro.SalarioAcum);
  end loop;
@@ -257,7 +257,7 @@ begin
  from emp inner join dept on dept.deptno=emp.deptno
  where dept.deptno=codigo group by dept.deptno,dname;
  dbms_output.put_line('Departamento:'||nombred);
- dbms_output.put_line('Nº:'||numerod);
+ dbms_output.put_line('NÂº:'||numerod);
  dbms_output.put_line('Cantidad de empleados:'||cantidad);
  dbms_output.put_line('Salario total del departamento:$'||salario);
  exception 
@@ -313,7 +313,7 @@ begin
  from emp inner join dept on emp.deptno=dept.deptno
  group by dept.deptno,dname;
  dbms_output.put_line('Departamento:'||nombre);
- dbms_output.put_line('Nº:'||codigo);
+ dbms_output.put_line('NÂº:'||codigo);
  dbms_output.put_line('Cantidad de empleados:'||cantidad);
  dbms_output.put_line('Salario:$'||salarioT);
  end loop;
@@ -369,26 +369,26 @@ select * from emp
 
 
 
-/*Me muestra los empleados contratados entre los años 80 y 89*/
+/*Me muestra los empleados contratados entre los aÃ±os 80 y 89*/
 
 select 
-(select count(empno) from emp where to_char(hiredate,'YY')= '80') "Año 80",
-(select count(empno) from emp where to_char(hiredate,'YY')='81') "Año 81",
-(select count(empno) from emp where to_char(hiredate,'YY')='82') "Año 82",
-(select count(empno) from emp where to_char(hiredate,'YY')='83') "Año 83",
-(select count(empno) from emp where to_char(hiredate,'YY')='84') "Año 84",
-(select count(empno) from emp where to_char(hiredate,'YY')='85') "Año 85",
-(select count(empno) from emp where to_char(hiredate,'YY')='86') "Año 86",
-(select count(empno) from emp where to_char(hiredate,'YY')='87') "Año 87",
-(select count(empno) from emp where to_char(hiredate,'YY')='88') "Año 88",
-(select count(empno) from emp where to_char(hiredate,'YY')='89') "Año 89",
+(select count(empno) from emp where to_char(hiredate,'YY')= '80') "AÃ±o 80",
+(select count(empno) from emp where to_char(hiredate,'YY')='81') "AÃ±o 81",
+(select count(empno) from emp where to_char(hiredate,'YY')='82') "AÃ±o 82",
+(select count(empno) from emp where to_char(hiredate,'YY')='83') "AÃ±o 83",
+(select count(empno) from emp where to_char(hiredate,'YY')='84') "AÃ±o 84",
+(select count(empno) from emp where to_char(hiredate,'YY')='85') "AÃ±o 85",
+(select count(empno) from emp where to_char(hiredate,'YY')='86') "AÃ±o 86",
+(select count(empno) from emp where to_char(hiredate,'YY')='87') "AÃ±o 87",
+(select count(empno) from emp where to_char(hiredate,'YY')='88') "AÃ±o 88",
+(select count(empno) from emp where to_char(hiredate,'YY')='89') "AÃ±o 89",
 (select count(empno) from emp) "TOTAL EMPLEADOS"
 from dual;
 
-/*Cantidad de empleados segun año de contratacion */
+/*Cantidad de empleados segun aÃ±o de contratacion */
 declare
  cursor fechas is
- select to_char(hiredate,'YYYY') as Año , count(empno) as Cantidad from emp
+ select to_char(hiredate,'YYYY') as AÃ±o , count(empno) as Cantidad from emp
  group by to_char(hiredate,'YYYY')
  order by to_char(hiredate,'YYYY') asc;
  v_fechas fechas%rowtype;
@@ -398,12 +398,12 @@ begin
  loop
  fetch fechas into v_fechas;
  exit when fechas%notfound;
- dbms_output.put_line('Año '||v_fechas.Año||' cantidad: '||v_fechas.cantidad);
+ dbms_output.put_line('AÃ±o '||v_fechas.AÃ±o||' cantidad: '||v_fechas.cantidad);
  end loop;
  close fechas;
 end;
 
-/*Proceso almacenado que me muestra la cantidad de empleados segun año de contratacion que se le envia*/
+/*Proceso almacenado que me muestra la cantidad de empleados segun aÃ±o de contratacion que se le envia*/
 
 create or replace procedure CantidadEmpleados(fecha varchar2)
 is
@@ -425,7 +425,7 @@ begin
  from emp
  where to_char(hiredate,'YYYY')=v_fecha
  group by to_char(hiredate,'YYYY');
- dbms_output.put_line('Año '||v_ani||' cantidad:'||v_cantidad);
+ dbms_output.put_line('AÃ±o '||v_ani||' cantidad:'||v_cantidad);
  close c_fecha;
 end;
 
@@ -439,7 +439,7 @@ execute cantidadEmpleados('1987')
 
 declare
  cursor fechas is
- select to_char(hiredate,'YYYY') as Año from emp
+ select to_char(hiredate,'YYYY') as AÃ±o from emp
  where to_char(hiredate,'YYYY')='1980';
  v_fechas fechas%rowtype;
 
@@ -448,7 +448,71 @@ begin
  loop
  fetch fechas into v_fechas;
  exit when fechas%notfound;
- dbms_output.put_line('Año '||v_fechas.Año);
+ dbms_output.put_line('AÃ±o '||v_fechas.AÃ±o);
  end loop;
  close fechas;
 end;
+
+
+/*Procedimiento en el cual hace una lista de los empleados y el puesto que poseen, segun
+el anio de contratacion y la cantidad de ellos que se contrataron ese anio*/
+create or replace procedure EmpleadosAnio(anio number)
+is
+ cursor contratado is select to_char(hiredate,'YYYY') as Anio, ename,job
+ from emp where to_char(hiredate,'YYYY')=anio;
+ copiaempe contratado%rowtype;
+begin
+ if not contratado%isopen then
+ open contratado;
+ end if;
+ 
+ loop
+  fetch contratado into copiaempe;
+  exit when contratado%notfound;
+  dbms_output.put_line('---------------------');
+  dbms_output.put_line('Empleado: '||copiaempe.ename);
+  dbms_output.put_line('Puesto: '||copiaempe.job);
+
+ end loop;
+   dbms_output.put_line('');
+   dbms_output.put_line('Total de empleados contratados en el anio '||anio|| ': '||contratado%rowcount);
+ close contratado;
+end;
+
+set serveroutput on;
+execute EmpleadosAnio(1981);
+
+
+
+
+/*Paquetes*/
+create or replace package empleados
+as
+cursor ma return emp%rowtype;
+end empleados;
+
+create or replace package body empleados
+as
+cursor ma return emp%rowtype 
+is select * from emp where sal>=2000;
+end empleados;
+
+
+
+
+/*Paquete con la funcion suma*/
+CREATE OR REPLACE PACKAGE testpackage as 
+function suma( n1 in number, n2 in number ) return number; 
+END testpackage; 
+ 
+CREATE OR REPLACE PACKAGE BODY testpackage as 
+function suma( n1 in number, n2 in number ) return number 
+as 
+rtn number; 
+begin 
+rtn := n1 + n2; 
+return rtn; 
+end; 
+END testpackage; 
+ 
+select testpackage.suma( 12,13) from dual;  
