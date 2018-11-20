@@ -39,3 +39,5 @@ INSERT INTO TABLA A
 SELECT * FROM TABLA B-- PARA INSERTAR DATOS DE UNA TABLA A OTRA
 
 JOIN,INNER JOIN,RIGHT JOIN,LEFT JOIN.
+
+https://www.oracle.com/technetwork/es/articles/sql/caracteristicas-database11g-2108415-esa.html
